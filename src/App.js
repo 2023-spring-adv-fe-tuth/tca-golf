@@ -1,6 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { NavBar } from './NavBar';
 import { HomePage, PlayPage, ResultsPage } from './pages';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
+
 import './App.css';
 
 function App() {

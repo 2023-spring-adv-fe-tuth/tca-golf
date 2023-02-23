@@ -1,16 +1,19 @@
 import { Link } from 'react-router-dom'
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
+
 export const NavBar = () => {
     return (
         <ul>
             <li>
-                <button><Link to="/">Home</Link></button>
+                <Button href="./" variant="primary">Home</Button>
             </li>
             <li>
-                <button><Link to="/Play">Play</Link></button>
+                <Button href="./Play" variant="primary">Play</Button>
             </li>
             <li>
-                <button><Link to="/Results">Results</Link></button>
+                <Button href="./Results" variant="primary">Results</Button>
             </li>
         </ul>
     )
