@@ -1,6 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from 'react';
-import { NavBar } from './NavBar';
+import { HashRouter, Routes, Route } from "react-router-dom";
+
 import { HomePage, PlayPage, ResultsPage } from './pages';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,18 +7,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 
-function App() {
+const App = () => {
 
   return (
     <div className="App">
-      <BrowserRouter>
-      <NavBar />
+      <HashRouter>
         <Routes>
-          <Route path="/" element={< HomePage/>} />
-          <Route path="/Play" element={< PlayPage />} />
-          <Route path="/Results" element={< ResultsPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/play" element={<PlayPage />} />
+          <Route path="/results" element={<ResultsPage />} />
         </Routes>
-      </BrowserRouter>
+
+      </HashRouter>
     </div>
   );
 }

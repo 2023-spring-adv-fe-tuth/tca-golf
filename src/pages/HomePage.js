@@ -1,6 +1,6 @@
 
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card'
+import PlayerEntry from '../playerEntry.js'
 
 
 const hardcodedGameResults = [
@@ -103,25 +103,12 @@ const hardcodedGameResults = [
 
 export const HomePage = () => {
 
-
     return (
         <>
             <h1>TCA Golf Companion App</h1><br />
 
-            <div class="row, mx-5">
-                <input class="col-4" type='text' placeholder="Enter Player Name" />
-                <Button variant="primary" size="sm">Enter</Button>
-            </div>
+            <PlayerEntry/>
 
-
-            <br /><br />
-            <Button
-                href="./play"
-                type='submit'
-                variant="success"
-                size="lg">
-                Play!
-            </Button>
 
             <Card className="mt-3">
                 <Card.Header>

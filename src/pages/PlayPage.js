@@ -2,9 +2,13 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import { useNavigate } from 'react-router-dom';
 
 
 export const PlayPage = () => {
+
+    const nav = useNavigate();
+
     return (
         <Form>
             <Row>
@@ -50,7 +54,12 @@ export const PlayPage = () => {
                 </Col>
 
             </Row>
-            <Button type='submit' variant='outline-success'>Submit Scores</Button>
+            <Button 
+                type='submit' 
+                variant='outline-success'
+                onClick={() =>nav("/results")}>
+                    Submit Scores
+                </Button>
         </Form>
     );
 }
