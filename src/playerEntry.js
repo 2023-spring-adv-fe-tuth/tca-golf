@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
+import { Button, Form } from 'react-bootstrap';
 
 function PlayerEntry() {
   const [players, setPlayers] = useState([]);
@@ -50,7 +50,9 @@ function PlayerEntry() {
 
   return (
     <div>
-      <form onSubmit={handleAddPlayer}>
+      <Form
+        onSubmit={handleAddPlayer}
+        >
         <input
           type="text"
           value={newPlayerName}
@@ -58,10 +60,13 @@ function PlayerEntry() {
           placeholder="Enter player name"
         />
         <Button 
+          style={{verticalAlign: 'top'}}
           size="sm"
           variant="outline-primary"
           type="submit">Add Player</Button>
-      </form>
+      </Form>
+      <br/>
+      <p style={{textDecoration: 'underline', fontWeight: 'bold'}}>Player List:</p>
       <ul style={{ listStyleType: 'none' }}>
         {players.map((player, index) => (
           <li key={player.name}>
@@ -74,6 +79,7 @@ function PlayerEntry() {
 
             
             <Button 
+              style={{padding: '2px', verticalAlign: 'top', marginLeft:"10px", }}
               size="sm"
               type="button"
               variant="outline-danger"
@@ -84,7 +90,7 @@ function PlayerEntry() {
           </li>
         ))}
       </ul>
-      <br /><br />
+      <br/>
       <Button
         type='submit'
         variant="success"

@@ -5,7 +5,7 @@ import { HomePage, PlayPage, ResultsPage } from './pages';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './App.css';
-import { useEffect } from "react";
+
 
 
 

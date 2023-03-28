@@ -49,11 +49,12 @@ export const HomePage = () => {
   
     return (
       <>
+        <br/>
         <h1>TCA Golf Companion App</h1>
         <br />
         <PlayerEntry />
   
-        <Card className="mt-3">
+        <Card className="mt-3" style={{margin: '0px 90px'}}>
           <Card.Header>Leaderboard</Card.Header>
           <Card.Body>
             <Table striped bordered hover>
