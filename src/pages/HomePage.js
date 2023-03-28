@@ -1,124 +1,89 @@
-
-import Card from 'react-bootstrap/Card'
-import PlayerEntry from '../playerEntry.js'
-
-
-const hardcodedGameResults = [
-    {
-        winner: "Tom"
-        , players: ["Tom", "Taylor"]
-        , score: 33
-    }
-    , {
-        winner: "Taylor"
-        , players: ["Jack", "Taylor"]
-        , score: 23
-    }
-    , {
-        winner: "Taylor"
-        , players: ["Tom", "Taylor", "Jack"]
-        , score: 53
-    }
-    , {
-        winner: "X"
-        , players: ["X", "Joe"]
-        , score: 11
-    }
-    , {
-        winner: "X"
-        , players: ["X", "Joe"]
-        , score: 31
-    }
-    , {
-        winner: "Joe"
-        , players: ["X", "Joe"]
-        , score: 14
-    }
-    , {
-        winner: "Jack"
-        , players: ["X", "Joe", "Jack"]
-        , score: 55
-    }
-];
-
-    const getPreviousPlayers = (grs) => {
-
-        const allPreviousPlayers = grs.flatMap(x => x.players);
-
-        return [
-            ...new Set(allPreviousPlayers)
-        ].sort();
-    };
-
-
-    const calculateLeaderboard = (results) => {
-
-        const gameResultsGroupedByPlayer = getPreviousPlayers(results).reduce(
-            (acc, x) => acc.set(
-                x
-                , results.filter(y => y.players.includes(x))
-            )
-            , new Map()
-        );
-
-        return [...gameResultsGroupedByPlayer]
-            // First object with names game counts and wins...
-            .map(x => ({
-                name: x[0]
-                , totalGames: x[1].length
-                , wins: x[1].filter(y => y.winner === x[0]).length
-            }))
-            /// Now use wins and total games to get avg and losses
-            .map(x => ({
-                name: x.name
-                , wins: x.wins
-                , losses: x.totalGames - x.wins
-                , avg: x.wins / x.totalGames
-            }))
-            .sort(
-                (a, b) => (a.avg * 1000 + a.wins + a.losses) > (b.avg * 1000 + b.wins + b.losses) ? -1 : 1
-            )
-            .map(x => ({
-                ...x
-                , avg: x.avg.toFixed(3)
-            }))
-            ;
-    };
-    
-    const gameList = () => {
-        
-        const sortedGameResults = calculateLeaderboard(hardcodedGameResults).map((game) => <li><br/>Player: {game.name} <br/> Avg: {game.avg} <br/> Wins: {game.wins} <br/></li>)
-        return (
-            sortedGameResults
-        )
-    }
-
-
-    
-
-
-
-
-
+import { useEffect, useState } from 'react';
+import { Card, Table } from 'react-bootstrap';
+import PlayerEntry from '../playerEntry';
 
 export const HomePage = () => {
-
+    const [leaderboard, setLeaderboard] = useState([]);
+  
+    useEffect(() => {
+      // Retrieve scores from localStorage
+      const scoresJson = localStorage.getItem('scores');
+      const scoresArray = JSON.parse(scoresJson);
+  
+      // Create leaderboard from scores
+      const leaderboard = scoresArray?.reduce((acc, score) => {
+        const player = acc.find(p => p.name === score.name);
+        if (player) {
+          player.gamesPlayed++;
+          player.total += score.total;
+          player.bestScore = Math.min(player.bestScore, score.total);
+        } else {
+          acc.push({
+            name: score.name,
+            gamesPlayed: + 1,
+            total: score.total,
+            average: score.total,
+            bestScore: score.total,
+          });
+        }
+        return acc;
+      }, []);
+  
+      // Calculate averages
+      leaderboard.forEach(p => {
+        p.average = p.total / p.gamesPlayed;
+      });
+  
+      // Sort leaderboard by average score and best score
+      if (leaderboard) {
+        leaderboard.sort((a, b) => {
+          if (a.average === b.average) {
+            return a.bestScore - b.bestScore;
+          }
+          return b.average - a.average;
+        });
+      }
+  
+      setLeaderboard(leaderboard);
+    }, []);
+  
     return (
-        <>
-            <h1>TCA Golf Companion App</h1><br />
+      <>
+        <h1>TCA Golf Companion App</h1>
+        <br />
+        <PlayerEntry />
+  
+        <Card className="mt-3">
+          <Card.Header>Leaderboard</Card.Header>
+          <Card.Body>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Games Played</th>
+                  <th>Average Score</th>
+                  <th>Best Score</th>
 
-            <PlayerEntry/>
+                </tr>
+              </thead>
+              <tbody>
+                {leaderboard.slice(0, 5).map((player, index) => (
+                  <tr key={player.name}>
+                    <td>{index + 1}</td>
+                    <td>{player.name}</td>
+                    <td>{player.gamesPlayed}</td>
+                    <td>{player.average.toFixed(2)}</td>
+                    <td>{player.bestScore}</td>
 
-
-            <Card className="mt-3">
-                <Card.Header>
-                    Leaderboard
-                </Card.Header>
-                <Card.Body>
-                    <ul style={{ listStyleType: "none" }}>{gameList()}</ul>
-                </Card.Body>
-            </Card>
-        </>
-
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </Card.Body>
+        </Card>
+      </>
     );
-}
+  };
+  
+  

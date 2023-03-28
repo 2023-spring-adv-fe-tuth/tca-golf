@@ -17,6 +17,7 @@ function PlayerEntry() {
     }
     setPlayers([...players, { name: newPlayerName.trim(), selected: false }]);
     setNewPlayerName('');
+
   };
 
   const handlePlayerSelection = (event, index) => {
@@ -29,6 +30,14 @@ function PlayerEntry() {
     const updatedPlayers = [...players];
     updatedPlayers.splice(index, 1);
     setPlayers(updatedPlayers);
+  };
+
+  const handlePlayClick = () => {
+    if (players.filter(player => player.selected).length !== 2) {
+      alert('Please select 2 players to play');
+      return;
+    }
+    nav(`/play?players=${encodeURIComponent(JSON.stringify(players.filter(player => player.selected)))}`);
   };
 
   const nav = useNavigate();
@@ -56,6 +65,8 @@ function PlayerEntry() {
               onChange={(event) => handlePlayerSelection(event, index)}
             />
             {player.name}
+
+            
             <Button 
               size="sm"
               type="button"
@@ -72,8 +83,8 @@ function PlayerEntry() {
         type='submit'
         variant="success"
         size="lg"
-        onClick={() => nav("/play")}
-        disabled={players.filter((player) => player.selected).length !== 2}>
+        disabled={players.filter(player => player.selected).length !== 2}
+        onClick={handlePlayClick}>
         Play!
       </Button>
     </div>
