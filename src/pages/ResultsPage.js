@@ -35,7 +35,7 @@ export const ResultsPage = () => {
         </tbody>
       </table>
 
-      <Link to="../.." relative="path">
+    <Link to="../.." relative="path">
       Back to Home
     </Link>
     </div>

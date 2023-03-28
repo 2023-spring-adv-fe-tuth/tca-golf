@@ -15,7 +15,13 @@ function PlayerEntry() {
       alert('Player already exists');
       return;
     }
-    setPlayers([...players, { name: newPlayerName.trim(), selected: false }]);
+
+    let selected = false;
+    if (players.length < 2) {
+      selected = true;
+    }
+
+    setPlayers([...players, { name: newPlayerName.trim(), selected }]);
     setNewPlayerName('');
 
   };
