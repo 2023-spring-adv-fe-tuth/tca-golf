@@ -32,7 +32,6 @@ export const PlayPage = () => {
     localStorage.setItem('scores', JSON.stringify(updatedScores));
     
     // Navigate to results page
-    
     navigate('/results');
 
     

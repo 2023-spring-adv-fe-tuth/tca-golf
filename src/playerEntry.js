@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 
 function PlayerEntry() {
   const [players, setPlayers] = useState([]);
   const [newPlayerName, setNewPlayerName] = useState('');
+  const [scores, setScores] = useState([]);
 
+  // Retrieve previous players/scores
+useEffect(() => {
+  const scoresJson = localStorage.getItem('scores');
+  const scoresArray = JSON.parse(scoresJson);
+  setScores(scoresArray);
+}, []);
+
+
+// Adds player and checks for duplicates
   const handleAddPlayer = (event) => {
     event.preventDefault();
     if (newPlayerName.trim() === '') {
@@ -16,6 +26,7 @@ function PlayerEntry() {
       return;
     }
 
+    // Auto selects players, after two players have been added auto-select will disengage
     let selected = false;
     if (players.length < 2) {
       selected = true;
@@ -26,18 +37,21 @@ function PlayerEntry() {
 
   };
 
+  // player selection
   const handlePlayerSelection = (event, index) => {
     const updatedPlayers = [...players];
     updatedPlayers[index].selected = event.target.checked;
     setPlayers(updatedPlayers);
   };
 
+  // remove player if needed
   const handleRemovePlayer = (index) => {
     const updatedPlayers = [...players];
     updatedPlayers.splice(index, 1);
     setPlayers(updatedPlayers);
   };
 
+  // Makes sure two players are selected before games starts
   const handlePlayClick = () => {
     if (players.filter(player => player.selected).length !== 2) {
       alert('Please select 2 players to play');
@@ -45,6 +59,22 @@ function PlayerEntry() {
     }
     nav(`/play?players=${encodeURIComponent(JSON.stringify(players.filter(player => player.selected)))}`);
   };
+
+  // Maps previousScores into a list of selectable players
+  const previousPlayers = () => {
+    return (
+      scores.map(...scores, score => (
+        <li key={score.name}>
+          <input
+          type='checkbox'>
+            {score.name}
+          </input>
+        </li>
+      ))
+    )
+  }
+
+ 
 
   const nav = useNavigate();
 
@@ -68,6 +98,7 @@ function PlayerEntry() {
       <br/>
       <p style={{textDecoration: 'underline', fontWeight: 'bold'}}>Player List:</p>
       <ul style={{ listStyleType: 'none' }}>
+        {previousPlayers}
         {players.map((player, index) => (
           <li key={player.name}>
             <input
@@ -76,6 +107,7 @@ function PlayerEntry() {
               onChange={(event) => handlePlayerSelection(event, index)}
             />
             {player.name}
+
 
             
             <Button 
@@ -89,6 +121,7 @@ function PlayerEntry() {
             </Button>
           </li>
         ))}
+        
       </ul>
       <br/>
       <Button

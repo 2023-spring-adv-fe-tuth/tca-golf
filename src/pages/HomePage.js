@@ -20,7 +20,7 @@ export const HomePage = () => {
         } else {
           acc.push({
             name: score.name,
-            gamesPlayed: + 1,
+            gamesPlayed: 1,
             total: score.total,
             average: score.total,
             bestScore: score.total,
