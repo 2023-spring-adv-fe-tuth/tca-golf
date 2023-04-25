@@ -1,7 +1,11 @@
+#PlayBody {
+    background-color: lightgreen;
+}
+
 .Form {
     background-color: lightgreen;
     padding-top: 20px;
-    margin: 0;
+    padding-bottom: 300px;
 }
 
 #SubmitButton {

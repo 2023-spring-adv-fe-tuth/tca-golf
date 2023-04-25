@@ -41,7 +41,7 @@ export const PlayPage = () => {
   const holeNames = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
   return (
-    <div>
+    <div id="PlayBody">
       <h1 id="PlayGolf">Play Golf!</h1>
       <form onSubmit={HandleScoreSubmit} class="Form">
         <table style={{margin: "auto"}}>
