@@ -1,0 +1,22 @@
+.card-header, .card-body {
+    background-color:  rgb(254, 239, 138);
+}
+
+div.card-header {
+    background-color: gold;
+}
+
+.table {
+    background-color: rgb(255, 230, 68);
+}
+
+#HomePageBody {
+    background-color: lightgreen;
+    padding-bottom: 300px;
+}
+
+h1 {
+    background-color: rgb(0, 185, 0);
+    padding: 40px 0 40px 0;
+    color: white;
+}

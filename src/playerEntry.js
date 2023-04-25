@@ -60,10 +60,6 @@ useEffect(() => {
 
   // Makes sure two players are selected before games starts
   const handlePlayClick = () => {
-    if (players.filter(player => player.selected).length !== 2) {
-      alert('Please select 2 players to play');
-      return;
-    }
     nav(`/play?players=${encodeURIComponent(JSON.stringify(players.filter(player => player.selected)))}`);
   };
  
@@ -84,7 +80,7 @@ useEffect(() => {
         <Button 
           style={{verticalAlign: 'top'}}
           size="sm"
-          variant="outline-primary"
+          variant="outline-success"
           type="submit">Add Player</Button>
       </Form>
       <br/>
@@ -114,7 +110,6 @@ useEffect(() => {
         ))}
         
       </ul>
-      <br/>
       <Button
         type='submit'
         variant="success"

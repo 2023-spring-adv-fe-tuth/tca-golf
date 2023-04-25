@@ -1,0 +1,10 @@
+.Form {
+    background-color: lightgreen;
+    padding-top: 20px;
+    margin: 0;
+}
+
+#SubmitButton {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}

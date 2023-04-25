@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import '../PlayPage.css'
 
 export const PlayPage = () => {
   const { search } = useLocation();
@@ -41,9 +42,8 @@ export const PlayPage = () => {
 
   return (
     <div>
-        <h1>Play Golf!</h1>
-        <br/>
-      <form onSubmit={HandleScoreSubmit}>
+      <h1 id="PlayGolf">Play Golf!</h1>
+      <form onSubmit={HandleScoreSubmit} class="Form">
         <table style={{margin: "auto"}}>
           <thead>
             <tr>
@@ -69,7 +69,7 @@ export const PlayPage = () => {
             ))}
           </tbody>
         </table>
-        <Button 
+        <Button id="SubmitButton"
           type="submit"
           >
             Submit Scores

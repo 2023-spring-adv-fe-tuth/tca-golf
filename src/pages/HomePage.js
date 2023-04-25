@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Card, Table } from 'react-bootstrap';
 import PlayerEntry from '../playerEntry';
+import '../HomePage.css';
 
 export const HomePage = () => {
     const [leaderboard, setLeaderboard] = useState([]);
@@ -49,8 +50,7 @@ export const HomePage = () => {
     }, []);
     
     return (
-      <>
-        <br/>
+      <div id="HomePageBody">
         <h1>TCA Golf Companion App</h1>
         <br />
         <PlayerEntry />
@@ -84,7 +84,7 @@ export const HomePage = () => {
             </Table>
           </Card.Body>
         </Card>
-      </>
+      </div>
     );
   };
   
