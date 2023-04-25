@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 export const ResultsPage = () => {
@@ -35,9 +36,11 @@ export const ResultsPage = () => {
         </tbody>
       </table>
 
-    <Link to="../.." relative="path">
-      Back to Home
-    </Link>
+      <Link to="/">
+        <Button>
+          Back to Home
+        </Button>
+      </Link>
     </div>
   );
 };

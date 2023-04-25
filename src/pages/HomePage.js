@@ -4,13 +4,14 @@ import PlayerEntry from '../playerEntry';
 
 export const HomePage = () => {
     const [leaderboard, setLeaderboard] = useState([]);
+
   
     useEffect(() => {
-      // Retrieve scores from localStorage
+      // Retrieve all scores from localStorage
       const scoresJson = localStorage.getItem('scores');
-      const scoresArray = JSON.parse(scoresJson);
-  
-      // Create leaderboard from scores
+      const scoresArray = JSON.parse(scoresJson) || [];
+    
+      // Create leaderboard from all scores
       const leaderboard = scoresArray?.reduce((acc, score) => {
         const player = acc.find(p => p.name === score.name);
         if (player) {
@@ -28,12 +29,12 @@ export const HomePage = () => {
         }
         return acc;
       }, []);
-  
+    
       // Calculate averages
       leaderboard.forEach(p => {
         p.average = p.total / p.gamesPlayed;
       });
-  
+    
       // Sort leaderboard by average score and best score
       if (leaderboard) {
         leaderboard.sort((a, b) => {
@@ -43,10 +44,10 @@ export const HomePage = () => {
           return b.average - a.average;
         });
       }
-  
+    
       setLeaderboard(leaderboard);
     }, []);
-  
+    
     return (
       <>
         <br/>
@@ -55,7 +56,7 @@ export const HomePage = () => {
         <PlayerEntry />
   
         <Card className="mt-3" style={{margin: '0px 90px'}}>
-          <Card.Header>Leaderboard</Card.Header>
+          <Card.Header>Golden Jacket Club</Card.Header>
           <Card.Body>
             <Table striped bordered hover>
               <thead>

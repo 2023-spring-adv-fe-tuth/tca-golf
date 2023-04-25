@@ -12,6 +12,13 @@ useEffect(() => {
   const scoresJson = localStorage.getItem('scores');
   const scoresArray = JSON.parse(scoresJson);
   setScores(scoresArray);
+
+   // Add previous players to the players list
+  const previousPlayers = scoresArray.map((score) => ({
+    name: score.name,
+    selected: false
+  }));
+  setPlayers(previousPlayers);
 }, []);
 
 
@@ -59,21 +66,6 @@ useEffect(() => {
     }
     nav(`/play?players=${encodeURIComponent(JSON.stringify(players.filter(player => player.selected)))}`);
   };
-
-  // Maps previousScores into a list of selectable players
-  const previousPlayers = () => {
-    return (
-      scores.map(...scores, score => (
-        <li key={score.name}>
-          <input
-          type='checkbox'>
-            {score.name}
-          </input>
-        </li>
-      ))
-    )
-  }
-
  
 
   const nav = useNavigate();
@@ -98,7 +90,6 @@ useEffect(() => {
       <br/>
       <p style={{textDecoration: 'underline', fontWeight: 'bold'}}>Player List:</p>
       <ul style={{ listStyleType: 'none' }}>
-        {previousPlayers}
         {players.map((player, index) => (
           <li key={player.name}>
             <input

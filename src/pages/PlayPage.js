@@ -37,6 +37,8 @@ export const PlayPage = () => {
     
   };
 
+  const holeNames = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
   return (
     <div>
         <h1>Play Golf!</h1>
@@ -45,12 +47,14 @@ export const PlayPage = () => {
         <table style={{margin: "auto"}}>
           <thead>
             <tr>
+              <th>Holes</th>
               {players.map(player => <th key={player.name} >{player.name}</th>)}
             </tr>
           </thead>
           <tbody>
             {Array.from({ length: 9 }, (_, index) => (
               <tr key={index}>
+                <td>{holeNames[index]}</td>
                 {players.map(player => (
                   <td key={player.name}>
                     <input type="number" min="-6" max="60" value={scores.find(score => score.name === player.name).scores[index]} onChange={(event) => {
@@ -58,7 +62,7 @@ export const PlayPage = () => {
                       const playerScores = updatedScores.find(score => score.name === player.name).scores;
                       playerScores[index] = event.target.value;
                       setScores(updatedScores);
-                    }} />
+                    }} ></input>
                   </td>
                 ))}
               </tr>
