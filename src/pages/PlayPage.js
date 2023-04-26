@@ -29,8 +29,21 @@ export const PlayPage = () => {
       };
     });
     
+    //
     // Store scores
-    localStorage.setItem('scores', JSON.stringify(updatedScores));
+    //
+
+    // Get any previous scores... Code taken from playerEntry useEffect()...
+    const previousScoresJson = localStorage.getItem('scores');
+    const previousScoresArray = JSON.parse(previousScoresJson) ?? [];
+
+    localStorage.setItem(
+      'scores'
+      , JSON.stringify([
+        ...previousScoresArray
+        , ...updatedScores
+      ])
+    );
     
     // Navigate to results page
     navigate('/results');
