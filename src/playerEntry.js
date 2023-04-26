@@ -10,7 +10,7 @@ function PlayerEntry() {
   // Retrieve previous players/scores
 useEffect(() => {
   const scoresJson = localStorage.getItem('scores');
-  const scoresArray = JSON.parse(scoresJson);
+  const scoresArray = JSON.parse(scoresJson) ?? [];
   setScores(scoresArray);
 
    // Add previous players to the players list
