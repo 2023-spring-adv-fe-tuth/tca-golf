@@ -64,7 +64,7 @@ export const HomePage = () => {
                   <th>Name</th>
                   <th>Games Played</th>
                   <th>Average Score</th>
-                  <th>Best Score</th>
+                  <th>Best Score (total)</th>
 
                 </tr>
               </thead>
