@@ -14,20 +14,34 @@ function PlayerEntry() {
     setScores(scoresArray);
   
     // Add previous players to the players list
-    const previousPlayers = [];
-    for (const score of scoresArray) {
-      let playerExists = false;
-      for (const player of previousPlayers) {
-        if (score.name === player.name) {
-          playerExists = true;
-          break;
-        }
-      }
-      if (!playerExists) {
-        previousPlayers.push({ name: score.name, selected: false });
-      }
-    }
+    const previousPlayers = [
+      ...new Set(
+        scoresArray.map(
+          x => x.name
+        )
+      )
+    ].map(
+      x => ({
+        name: x
+        , selected: false
+      })
+    );
+
+    // for (const score of scoresArray) {
+    //   let playerExists = false;
+    //   for (const player of previousPlayers) {
+    //     if (score.name === player.name) {
+    //       playerExists = true;
+    //       break;
+    //     }
+    //   }
+    //   if (!playerExists) {
+    //     previousPlayers.push({ name: score.name, selected: false });
+    //   }
+    // }
+
     setPlayers(previousPlayers);
+
   }, []);
 
 
