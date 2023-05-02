@@ -9,7 +9,7 @@ export const ResultsPage = () => {
     // Retrieve scores from localStorage
     const scoresJson = localStorage.getItem('scores');
     const scoresArray = JSON.parse(scoresJson);
-    setScores(scoresArray);
+    setScores(scoresArray.slice(-2));
   }, []);
 
   return (

@@ -8,18 +8,27 @@ function PlayerEntry() {
   const [scores, setScores] = useState([]);
 
   // Retrieve previous players/scores
-useEffect(() => {
-  const scoresJson = localStorage.getItem('scores');
-  const scoresArray = JSON.parse(scoresJson);
-  setScores(scoresArray);
-
-   // Add previous players to the players list
-  const previousPlayers = scoresArray.map((score) => ({
-    name: score.name,
-    selected: false
-  }));
-  setPlayers(previousPlayers);
-}, []);
+  useEffect(() => {
+    const scoresJson = localStorage.getItem('scores');
+    const scoresArray = JSON.parse(scoresJson) ?? [];
+    setScores(scoresArray);
+  
+    // Add previous players to the players list
+    const previousPlayers = [];
+    for (const score of scoresArray) {
+      let playerExists = false;
+      for (const player of previousPlayers) {
+        if (score.name === player.name) {
+          playerExists = true;
+          break;
+        }
+      }
+      if (!playerExists) {
+        previousPlayers.push({ name: score.name, selected: false });
+      }
+    }
+    setPlayers(previousPlayers);
+  }, []);
 
 
 // Adds player and checks for duplicates
