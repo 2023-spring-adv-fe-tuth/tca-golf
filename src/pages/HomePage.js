@@ -42,7 +42,7 @@ export const HomePage = () => {
           if (a.average === b.average) {
             return a.bestScore - b.bestScore;
           }
-          return b.average - a.average;
+          return a.average - b.average;
         });
       }
     
