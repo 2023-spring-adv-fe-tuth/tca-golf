@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
 import { Card, Table } from 'react-bootstrap';
 import PlayerEntry from '../playerEntry';
+import { LineChart } from '../LineChart';
 import '../HomePage.css';
+
 
 export const HomePage = () => {
     const [leaderboard, setLeaderboard] = useState([]);
 
-  
+    // Retrieve all scores from localStorage
+    const scoresJson = localStorage.getItem('scores');
+    const scoresArray = JSON.parse(scoresJson) || [];
+
     useEffect(() => {
-      // Retrieve all scores from localStorage
-      const scoresJson = localStorage.getItem('scores');
-      const scoresArray = JSON.parse(scoresJson) || [];
-    
       // Create leaderboard from all scores
       const leaderboard = scoresArray?.reduce((acc, score) => {
         const player = acc.find(p => p.name === score.name);
@@ -48,6 +49,9 @@ export const HomePage = () => {
     
       setLeaderboard(leaderboard);
     }, []);
+
+
+
     
     return (
       <div id="HomePageBody">
@@ -83,6 +87,7 @@ export const HomePage = () => {
             </Table>
           </Card.Body>
         </Card>
+        <LineChart leaderboard={leaderboard}/>
       </div>
     );
   };
