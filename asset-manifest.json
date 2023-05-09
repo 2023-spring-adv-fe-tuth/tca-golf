@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/2023-spring-adv-fe-tuth/tca-golf/static/css/main.bfeef5af.css",
+    "main.js": "/2023-spring-adv-fe-tuth/tca-golf/static/js/main.0cb807ed.js",
+    "static/js/787.02bd4fa4.chunk.js": "/2023-spring-adv-fe-tuth/tca-golf/static/js/787.02bd4fa4.chunk.js",
+    "index.html": "/2023-spring-adv-fe-tuth/tca-golf/index.html",
+    "main.bfeef5af.css.map": "/2023-spring-adv-fe-tuth/tca-golf/static/css/main.bfeef5af.css.map",
+    "main.0cb807ed.js.map": "/2023-spring-adv-fe-tuth/tca-golf/static/js/main.0cb807ed.js.map",
+    "787.02bd4fa4.chunk.js.map": "/2023-spring-adv-fe-tuth/tca-golf/static/js/787.02bd4fa4.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bfeef5af.css",
+    "static/js/main.0cb807ed.js"
+  ]
+}
